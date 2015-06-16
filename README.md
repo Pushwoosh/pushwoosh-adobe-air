@@ -1,1 +1,1 @@
-# pushwoosh-adobe-air
+# Pushwoosh Adobe Air Module and Sample
