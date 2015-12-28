@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <application xmlns="http://ns.adobe.com/air/application/18.0">
 
-	<id>com.pushwoosh.testapp</id>
+	<id>com.pushwoosh.testing</id>
 	<filename>TestPushNotifications</filename>
 	<name>TestPushNotifications</name>
 	<versionNumber>1.0.0</versionNumber>
@@ -41,7 +41,7 @@
 				<key>UIRequiresPersistentWiFi</key>
 				<string>YES</string>
 				<key>Pushwoosh_APPID</key>
-				<string>539E9-AB8AE</string>
+				<string>4FC89B6D14A655.46488481</string>
 			]]>
 		</InfoAdditions> 
 		 <Entitlements>
@@ -58,7 +58,7 @@
 		<manifest android:installLocation="auto">
 		
 			<application>
-				<meta-data android:name="PW_APPID" android:value="4F0C807E51EC77.93591449" />
+				<meta-data android:name="PW_APPID" android:value="4FC89B6D14A655.46488481" />
 				<meta-data android:name="PW_PROJECT_ID" android:value="A60756016005" />
 				<meta-data android:name="PW_BROADCAST_PUSH" android:value="true" />
 			

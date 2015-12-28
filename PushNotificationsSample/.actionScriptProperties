@@ -34,7 +34,7 @@
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_agent.swc" useDefaultLinkType="false"/>
         </excludedEntries>
       </libraryPathEntry>
-      <libraryPathEntry kind="5" linkType="2" path="/Users/Max/Desktop/Projects/Pushwoosh/Sources/SDKSamples/Adobe-Air/ANE-Pushwoosh/PushNotification.ane"/>
+      <libraryPathEntry kind="5" linkType="2" path="ANE-Pushwoosh/PushNotification.ane"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
@@ -48,12 +48,12 @@
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
   <buildTargets>
-    <buildTarget buildTargetName="device" iosSettingsVersion="2" isCurrent="false" platformId="com.adobe.flexide.multiplatform.ios.platform" provisioningFile="../certs/embedded.mobileprovision" releasePackageType="ipa-app-store">
-      <multiPlatformSettings enabled="true" hideAneLibSymbols="0" includePlatformLibs="false" nativeSDKPathString="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk" platformID="com.adobe.flexide.multiplatform.ios.platform" reducedSizePackaging="false" version="2"/>
-      <airSettings airCertificatePath="../certs/max_arello_mobile_com_distribution.p12" airTimestamp="true" anePathSet="true" version="1">
+    <buildTarget buildTargetName="device" iosSettingsVersion="2" isCurrent="true" platformId="com.adobe.flexide.multiplatform.ios.platform" provisioningFile="" releasePackageType="ipa-app-store">
+      <multiPlatformSettings enabled="true" hideAneLibSymbols="0" includePlatformLibs="false" platformID="com.adobe.flexide.multiplatform.ios.platform" reducedSizePackaging="false" version="2"/>
+      <airSettings airCertificatePath="" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths>
-          <anePathEntry path="/Users/Max/Desktop/Projects/Pushwoosh/Sources/SDKSamples/Adobe-Air/ANE-Pushwoosh/PushNotification.ane"/>
+          <anePathEntry path="ANE-Pushwoosh/PushNotification.ane"/>
         </anePaths>
         <newLaunchParams/>
         <modifiedLaunchParams/>
@@ -74,12 +74,12 @@
       </airSettings>
       <actionScriptSettings version="1"/>
     </buildTarget>
-    <buildTarget airDownloadURL="https://market.android.com/details?id=com.adobe.air" androidSettingsVersion="2" buildTargetName="device" isCurrent="false" platformId="com.adobe.flexide.multiplatform.android.platform">
+    <buildTarget airDownloadURL="https://market.android.com/details?id=com.adobe.air" androidSettingsVersion="2" buildTargetName="device" isCurrent="true" platformId="com.adobe.flexide.multiplatform.android.platform">
       <multiPlatformSettings enabled="true" hideAneLibSymbols="0" includePlatformLibs="false" platformID="com.adobe.flexide.multiplatform.android.platform" reducedSizePackaging="false" version="2"/>
-      <airSettings airCertificatePath="../certs/android.p12" airTimestamp="true" anePathSet="true" version="1">
+      <airSettings airCertificatePath="" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths>
-          <anePathEntry path="/Users/Max/Desktop/Projects/Pushwoosh/Sources/SDKSamples/Adobe-Air/ANE-Pushwoosh/PushNotification.ane"/>
+          <anePathEntry path="ANE-Pushwoosh/PushNotification.ane"/>
         </anePaths>
         <newLaunchParams/>
         <modifiedLaunchParams/>
