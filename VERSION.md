@@ -1,3 +1,6 @@
+Current version: 1.0.1
+=========================
+Update native libraries. Reduce ane size
 Current version: 1.0.0
 =========================
 Android Geofencing
