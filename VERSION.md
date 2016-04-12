@@ -1,3 +1,6 @@
+Current version: 1.0.2
+=========================
+fix https://github.com/Pushwoosh/pushwoosh-adobe-air/issues/9
 Current version: 1.0.1
 =========================
 Update native libraries. Reduce ane size
