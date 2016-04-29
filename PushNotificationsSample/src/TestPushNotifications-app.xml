@@ -116,6 +116,9 @@
 						<category android:name="android.intent.category.DEFAULT"/>
 					</intent-filter>
 				</activity>
+
+				<activity android:name="com.pushwoosh.inapp.WebActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+				<service android:name="com.pushwoosh.inapp.InAppRetrieverService" />
 			</application>
 
 			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
