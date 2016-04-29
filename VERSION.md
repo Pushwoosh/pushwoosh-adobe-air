@@ -1,3 +1,6 @@
+Current version: 1.1.0
+=========================
+Rich Media support
 Current version: 1.0.2
 =========================
 fix https://github.com/Pushwoosh/pushwoosh-adobe-air/issues/9
