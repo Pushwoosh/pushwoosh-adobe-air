@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <application xmlns="http://ns.adobe.com/air/application/20.0">
 
-	<id>com.pushwoosh.testing</id>
+	<id>com.pushwoosh.demoapp</id>
 	<filename>TestPushNotifications</filename>
 	<name>TestPushNotifications</name>
 	<versionNumber>1.0.0</versionNumber>
