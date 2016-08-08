@@ -1,3 +1,6 @@
+Current version: 1.2.0
+=========================
+sendPurchase method
 Current version: 1.1.1
 =========================
 Pushwoosh SDK update
