@@ -1,3 +1,6 @@
+Current version: 1.3.0
+=========================
+setUserId and postEvent methods for [In-App Messages](http://docs.pushwoosh.com/docs/in-app-messages)
 Current version: 1.2.0
 =========================
 sendPurchase method
