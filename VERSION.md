@@ -1,3 +1,10 @@
+Current version: 1.4.0
+=========================
+Pushwoosh Adobe Air Native Extension 1.4.0
+
+Modified:
+    Pushwoosh iOS SDK updated to 4.1.8 (https://github.com/Pushwoosh/pushwoosh-ios-sdk/releases)
+    Pushwoosh Android SDK updated to 4.10.1
 Current version: 1.3.1
 =========================
 [iOS] Fixed referencing non-Public API to pass project validation
