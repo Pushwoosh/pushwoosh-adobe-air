@@ -2,16 +2,11 @@ package
 {
 	import com.pushwoosh.nativeExtensions.*;
 	
-	import flash.desktop.*;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.*;
 	import flash.events.Event;
-	import flash.events.IOErrorEvent;
-	import flash.events.MouseEvent;
-	import flash.events.StatusEvent;
-	import flash.net.*;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.ui.Multitouch;
@@ -58,6 +53,7 @@ package
 			
 			//register for push
 			pushwoosh.registerForPushNotification();
+			pushwoosh.postEvent("test", { "buttonNumber" : "4", "buttonLabel" : "Banner" } );
 			
 			var pushToken:String = pushwoosh.getPushToken();
 			if(pushToken == null)
