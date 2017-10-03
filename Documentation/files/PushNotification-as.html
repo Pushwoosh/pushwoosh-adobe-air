@@ -34,6 +34,7 @@ if (browserType) {document.write("<div class=" + browserType + ">");if (browserV
 pushwoosh.addEventListener(PushNotificationEvent.PERMISSION_GIVEN_WITH_TOKEN_EVENT, onToken);
 pushwoosh.addEventListener(PushNotificationEvent.PERMISSION_REFUSED_EVENT, onError);
 pushwoosh.addEventListener(PushNotificationEvent.PUSH_NOTIFICATION_RECEIVED_EVENT, onPushReceived);
+pushwoosh.addEventListener(PushNotificationEvent.PUSH_NOTIFICATION_OPENED_EVENT, onPushOpened);
 
 pushwoosh.onDeviceReady();
 
