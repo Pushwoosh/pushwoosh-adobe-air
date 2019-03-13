@@ -2,7 +2,7 @@ package
 {
 	import com.pushwoosh.nativeExtensions.*;
 	import com.pushwoosh.geozones.nativeExtensions.*;
-	
+
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
