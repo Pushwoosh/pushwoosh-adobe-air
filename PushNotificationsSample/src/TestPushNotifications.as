@@ -1,7 +1,8 @@
 package
 {
 	import com.pushwoosh.nativeExtensions.*;
-	
+	import com.pushwoosh.geozones.nativeExtensions.*;
+
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
@@ -54,6 +55,9 @@ package
 			//register for push
 			pushwoosh.registerForPushNotification();
 			pushwoosh.postEvent("test", { "buttonNumber" : "4", "buttonLabel" : "Banner" } );
+
+			var pushwooshGeozones:PushwooshGeozones = PushwooshGeozones.getInstance();
+			pushwooshGeozones.startLocationTracking();
 			
 			var pushToken:String = pushwoosh.getPushToken();
 			if(pushToken == null)

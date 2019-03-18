@@ -41,7 +41,11 @@
 				<key>UIRequiresPersistentWiFi</key>
 				<string>YES</string>
 				<key>Pushwoosh_APPID</key>
-				<string>7559E-DE020</string>
+				<string>DC533-F5DA4</string>
+                        <key>NSLocationWhenInUseUsageDescription</key>
+                        <string>This demo uses location services for Pushwoosh Geozones</string>
+                        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+                        <string>This demo uses location services for Pushwoosh Geozones</string>
 			]]>
 		</InfoAdditions>
 		 <Entitlements>
@@ -59,8 +63,8 @@
 
 			<application>
 				<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-				<meta-data android:name="com.pushwoosh.appid" android:value="11C10-EF18D" />
-				<meta-data android:name="com.pushwoosh.senderid" android:value="A376816894616" />
+				<meta-data android:name="com.pushwoosh.appid" android:value="DC533-F5DA4" />
+				<meta-data android:name="com.pushwoosh.senderid" android:value="A487424016967" />
 				<meta-data android:name="PW_BROADCAST_PUSH" android:value="true" />
  				<meta-data android:name="com.pushwoosh.notification_icon" android:value="@drawable/notification_small_icon" />
 				<meta-data android:name="com.pushwoosh.notification_service_extension" android:value="com.pushwoosh.nativeExtensions.PushwooshNotificationServiceExtension"/>
@@ -176,7 +180,7 @@
 
 				 <provider
 		            android:name="com.pushwoosh.PushwooshInitProvider"
-		            android:authorities="air.com.pushwoosh.demoapp.debug.pushwooshinitprovider"
+		            android:authorities="air.com.pushwoosh.demoapp.pushwooshinitprovider"
 		            android:enabled="true"
 		            android:exported="false"
 		            android:initOrder="50" />
@@ -195,20 +199,18 @@
 
 				<provider
 					android:name="com.pushwoosh.gcm.GcmInitProvider"
-					android:authorities="air.com.pushwoosh.demoapp.debug.gcmpushwooshinitprovider"
+					android:authorities="air.com.pushwoosh.demoapp.gcmpushwooshinitprovider"
 					android:enabled="true"
 					android:exported="false"
 					android:initOrder="53" />
 
-				<!--
-				LOCATION
 
 				<receiver android:name="com.pushwoosh.location.geofencer.GeofenceReceiver">
 					<intent-filter>
-						<action android:name="air.com.pushwoosh.demoapp.debug.action.GEOFENCE" />
+						<action android:name="air.com.pushwoosh.demoapp.action.GEOFENCE" />
 					</intent-filter>
 				</receiver>
-				-->
+				
 
 				<!--
 				AMAZON
@@ -220,7 +222,7 @@
 
 				<provider
 					android:name="com.pushwoosh.amazon.AmazonInitProvider"
-					android:authorities="air.com.pushwoosh.demoapp.debug.amazonpushwooshinitprovider"
+					android:authorities="air.com.pushwoosh.demoapp.amazonpushwooshinitprovider"
 					android:enabled="true"
 					android:exported="false"
 					android:initOrder="52" />
@@ -257,19 +259,18 @@
 				<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
 				<permission
-					android:name="air.com.pushwoosh.demoapp.debug.permission.C2D_MESSAGE"
+					android:name="air.com.pushwoosh.demoapp.permission.C2D_MESSAGE"
 					android:protectionLevel="signature" />
 
-				<uses-permission android:name="air.com.pushwoosh.demoapp.debug.permission.C2D_MESSAGE" />
+				<uses-permission android:name="air.com.pushwoosh.demoapp.permission.C2D_MESSAGE" />
 
-				<!--
-				LOCATION
+				
 
 				<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 				<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 				<uses-permission-sdk-23 android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-				-->
+				
 
 				<!--
 				AMAZON
@@ -321,5 +322,6 @@
 
 	<extensions>
 		<extensionID>com.pushwoosh.PushNotification</extensionID>
+            <extensionID>com.pushwoosh.geozones</extensionID>
 	</extensions>
 </application>
