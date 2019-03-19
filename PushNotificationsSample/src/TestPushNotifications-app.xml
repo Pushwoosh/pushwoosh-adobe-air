@@ -28,7 +28,6 @@
 		<image144x144>assets/icon_144.png</image144x144>
 	</icon>
 	<iPhone>
-
 		 <InfoAdditions>
 			<![CDATA[
 				<key>UIDeviceFamily</key>
@@ -42,6 +41,12 @@
 				<string>YES</string>
 				<key>Pushwoosh_APPID</key>
 				<string>7559E-DE020</string>
+                <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+                <string>This demo uses location services for Pushwoosh Geozones and Beacons</string>
+                <key>NSLocationWhenInUseUsageDescription</key>
+                <string>This demo uses location services for Pushwoosh Geozones and Beacons</string>
+                <key>NSLocationAlwaysUsageDescription</key>
+                <string>This demo uses location services for Pushwoosh Geozones and Beacons</string>
 			]]>
 		</InfoAdditions>
 		 <Entitlements>
@@ -58,12 +63,12 @@
 		<manifest android:installLocation="auto">
 
 			<application>
-				<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-				<meta-data android:name="com.pushwoosh.appid" android:value="11C10-EF18D" />
-				<meta-data android:name="com.pushwoosh.senderid" android:value="A376816894616" />
-				<meta-data android:name="PW_BROADCAST_PUSH" android:value="true" />
- 				<meta-data android:name="com.pushwoosh.notification_icon" android:value="@drawable/notification_small_icon" />
-				<meta-data android:name="com.pushwoosh.notification_service_extension" android:value="com.pushwoosh.nativeExtensions.PushwooshNotificationServiceExtension"/>
+                <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+                <meta-data android:name="com.pushwoosh.appid" android:value="11C10-EF18D" />
+                <meta-data android:name="com.pushwoosh.senderid" android:value="A562785984945" />
+                <meta-data android:name="PW_BROADCAST_PUSH" android:value="true" />
+                <meta-data android:name="com.pushwoosh.notification_icon" android:value="@drawable/notification_small_icon" />
+                <meta-data android:name="com.pushwoosh.notification_service_extension" android:value="com.pushwoosh.nativeExtensions.PushwooshNotificationServiceExtension"/>
 				<activity
 					android:name="com.pushwoosh.inapp.view.RichMediaWebActivity"
 					android:theme="@android:style/Theme.Translucent.NoTitleBar" />
@@ -111,6 +116,28 @@
 					android:permission="android.permission.BIND_JOB_SERVICE"
 					android:enabled="true"
 					android:exported="false" />
+                
+                <provider
+                    android:name="com.pushwoosh.PushwooshInitProvider"
+                    android:authorities="air.com.pushwoosh.demoapp.pushwooshinitprovider"
+                    android:enabled="true"
+                    android:exported="false"
+                    android:initOrder="50" />
+                    
+                <provider
+                    android:name="com.pushwoosh.nativeExtensions.PushwooshFirebaseInitProvider"
+                    android:authorities="air.com.pushwoosh.demoapp.FirebaseInitProvider"
+                    android:enabled="true"
+                    android:exported="false"
+                    android:initOrder="60" />
+                    
+                <provider
+                    android:name="com.pushwoosh.PushwooshSharedDataProvider"
+                    android:authorities="air.com.pushwoosh.demoapp.PushwooshSharedDataProvider"
+                    android:enabled="true"
+                    android:exported="true"
+                    android:initOrder="60"
+                    />
 
 				<service
 					android:name="com.pushwoosh.PushwooshService"
@@ -122,38 +149,9 @@
 					android:enabled="true"
 					android:exported="false" />
 
-				<service android:name="com.pushwoosh.PushAmazonIntentService" />
-
 				<meta-data
 					android:name="com.pushwoosh.plugin.badge"
 					android:value="com.pushwoosh.badge.BadgePlugin" />
-
-				<service
-					android:name="com.pushwoosh.thirdparty.radiusnetworks.ibeacon.service.IBeaconService"
-					android:enabled="true"
-					android:exported="true"
-					android:isolatedProcess="false"
-					android:label="iBeacon" />
-				<service
-					android:name="com.pushwoosh.thirdparty.radiusnetworks.ibeacon.IBeaconIntentProcessor"
-					android:enabled="true" />
-				<service android:name="com.pushwoosh.beacon.PushBeaconService" />
-
-				<service
-					android:name="com.pushwoosh.GcmRegistrationService"
-					android:exported="false">
-					<intent-filter android:priority="-50">
-						<action android:name="com.google.android.gms.iid.InstanceID" />
-					</intent-filter>
-				</service>
-
-				<service
-					android:name="com.pushwoosh.PushGcmIntentService"
-					android:exported="false">
-					<intent-filter android:priority="-50">
-						<action android:name="com.google.android.c2dm.intent.RECEIVE" />
-					</intent-filter>
-				</service>
 
 				<meta-data
 					android:name="com.pushwoosh.plugin.location"
@@ -173,66 +171,29 @@
 					android:exported="true"
 					android:permission="android.permission.BIND_JOB_SERVICE" />
 
-
-				 <provider
-		            android:name="com.pushwoosh.PushwooshInitProvider"
-		            android:authorities="air.com.pushwoosh.demoapp.debug.pushwooshinitprovider"
-		            android:enabled="true"
-		            android:exported="false"
-		            android:initOrder="50" />
-
-
-				<receiver
-					android:name="com.google.android.gms.gcm.GcmReceiver"
-					android:exported="true"
-					android:permission="com.google.android.c2dm.permission.SEND">
-					<intent-filter>
-						<action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
-						<category android:name="air.com.pushwoosh.testapp" />
-					</intent-filter>
-				</receiver>
-
-				<provider
-					android:name="com.pushwoosh.gcm.GcmInitProvider"
-					android:authorities="air.com.pushwoosh.demoapp.debug.gcmpushwooshinitprovider"
-					android:enabled="true"
-					android:exported="false"
-					android:initOrder="53" />
+                <!-- firebase-iid START -->
+                <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
+                <intent-filter>
+                    <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                        <category android:name="air.com.pushwoosh.demoapp"/>
+                    </intent-filter>
+                </receiver>
+                
+                <!-- FirebaseInstanceIdService performs security checks at runtime,
+                no need for explicit permissions despite exported="true" -->
+                <service android:name="com.google.firebase.iid.FirebaseInstanceIdService" android:exported="true">
+                    <intent-filter android:priority="-500">
+                        <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                    </intent-filter>
+                </service>
+                <!-- firebase-iid END -->
 
 				<!--
 				LOCATION
 
 				<receiver android:name="com.pushwoosh.location.geofencer.GeofenceReceiver">
 					<intent-filter>
-						<action android:name="air.com.pushwoosh.demoapp.debug.action.GEOFENCE" />
-					</intent-filter>
-				</receiver>
-				-->
-
-				<!--
-				AMAZON
-				You must explicitly enable ADM. You must also declare whether your application will run with or without ADM.
-				If you specify android:required="false", your app must degrade gracefully when ADM is unavailable.
-				<amazon:enable-feature
-					android:name="com.amazon.device.messaging"
-					android:required="false" />
-
-				<provider
-					android:name="com.pushwoosh.amazon.AmazonInitProvider"
-					android:authorities="air.com.pushwoosh.demoapp.debug.amazonpushwooshinitprovider"
-					android:enabled="true"
-					android:exported="false"
-					android:initOrder="52" />
-
-				<receiver
-					android:name="com.pushwoosh.PushAmazonReceiver"
-					android:permission="com.amazon.device.messaging.permission.SEND">
-					<intent-filter>
-						<action android:name="com.amazon.device.messaging.intent.REGISTRATION" />
-						<action android:name="com.amazon.device.messaging.intent.RECEIVE" />
-
-						<category android:name="air.com.pushwoosh.testapp" />
+						<action android:name="air.com.pushwoosh.demoapp.action.GEOFENCE" />
 					</intent-filter>
 				</receiver>
 				-->
@@ -245,74 +206,61 @@
             		android:name="com.pushwoosh.nativeExtensions.AirInboxActivity" />
 			</application>
 
-							<!-- Keeps the processor from sleeping when a message is received. -->
-				<uses-permission android:name="android.permission.WAKE_LOCK" />
+            <!-- Keeps the processor from sleeping when a message is received. -->
+            <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-				<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-				<!-- FCM connects to Firebase Services. -->
-				<uses-permission android:name="android.permission.INTERNET" />
+            <!-- FCM connects to Firebase Services. -->
+            <uses-permission android:name="android.permission.INTERNET" />
 
-				<!-- This app has permission to register and receive data message. -->
-				<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+            <!-- This app has permission to register and receive data message. -->
+            <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-				<permission
-					android:name="air.com.pushwoosh.demoapp.debug.permission.C2D_MESSAGE"
-					android:protectionLevel="signature" />
+            <!-- Vibration in push notification -->
+            <uses-permission android:name="android.permission.VIBRATE" />
+            
+            <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-				<uses-permission android:name="air.com.pushwoosh.demoapp.debug.permission.C2D_MESSAGE" />
+            <!--BADGES-->
 
-				<!--
-				LOCATION
+            <!--for Samsung-->
+            <uses-permission android:name="com.sec.android.provider.badge.permission.READ"/>
+            <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE"/>
 
-				<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-				<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <!--for htc-->
+            <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS"/>
+            <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT"/>
 
-				<uses-permission-sdk-23 android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-				-->
+            <!--for sony-->
+            <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
+            <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE"/>
 
-				<!--
-				AMAZON
+            <!--for apex-->
+            <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT"/>
 
-				<uses-permission android:name="com.amazon.device.messaging.permission.RECEIVE" />
-				-->
+            <!--for solid-->
+            <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE"/>
 
-				<!--BADGES-->
+            <!--for huawei-->
+            <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
+            <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS"/>
+            <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS"/>
 
-				<!--for Samsung-->
-				<uses-permission android:name="com.sec.android.provider.badge.permission.READ"/>
-				<uses-permission android:name="com.sec.android.provider.badge.permission.WRITE"/>
+            <!--for ZUK-->
+            <uses-permission android:name="android.permission.READ_APP_BADGE"/>
 
-				<!--for htc-->
-				<uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS"/>
-				<uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT"/>
+            <!--for OPPO-->
+            <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS"/>
+            <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS"/>
 
-				<!--for sony-->
-				<uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
-				<uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE"/>
-
-				<!--for apex-->
-				<uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT"/>
-
-				<!--for solid-->
-				<uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE"/>
-
-				<!--for huawei-->
-				<uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
-				<uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS"/>
-				<uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS"/>
-
-				<!--for ZUK-->
-				<uses-permission android:name="android.permission.READ_APP_BADGE"/>
-
-				<!--for OPPO-->
-				<uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS"/>
-				<uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS"/>
-
-				<!--for EvMe-->
-				<uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ"/>
-				<uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE"/>
-
+            <!--for EvMe-->
+            <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ"/>
+            <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE"/>
+            
+            <!-- location -->
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 		</manifest>
 
 	]]></manifestAdditions>
@@ -321,5 +269,6 @@
 
 	<extensions>
 		<extensionID>com.pushwoosh.PushNotification</extensionID>
+        <extensionID>com.pushwoosh.geozones</extensionID>
 	</extensions>
 </application>

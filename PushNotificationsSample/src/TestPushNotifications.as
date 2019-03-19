@@ -1,7 +1,8 @@
 package
 {
 	import com.pushwoosh.nativeExtensions.*;
-	
+	import com.pushwoosh.geozones.nativeExtensions.*;
+
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
@@ -18,8 +19,8 @@ package
 	public class TestPushNotifications extends Sprite
 	{
 		private var notiStyles:Vector.<String> = new Vector.<String>;;
-		private var tt:TextField = new TextField();
-		private var tf:TextFormat = new TextFormat();
+		private var textField:TextField = new TextField();
+		private var textFormat:TextFormat = new TextFormat();
 		
 		public function TestPushNotifications()
 		{
@@ -29,18 +30,18 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
-			tf.size = 20;
-			tf.bold = true;
+			textFormat.size = 20;
+			textFormat.bold = true;
 			
 			
-			tt.x=0;
-			tt.y =150;
-			tt.height = stage.stageHeight;
-			tt.width = stage.stageWidth;
-			tt.border = true;
-		    tt.defaultTextFormat = tf;
+			textField.x=0;
+			textField.y =150;
+			textField.height = stage.stageHeight;
+			textField.width = stage.stageWidth;
+			textField.border = true;
+		    textField.defaultTextFormat = textFormat;
 			
-			addChild(tt);
+			addChild(textField);
 			
 			//register for push notifications
 			var pushwoosh:PushNotification = PushNotification.getInstance();
@@ -57,13 +58,13 @@ package
 			
 			var pushToken:String = pushwoosh.getPushToken();
 			if(pushToken == null)
-				tt.text += "\n Push TOKEN: not registered";
+				textField.appendText("\n Push TOKEN: not registered");
 			else
-				tt.text += "\n Registered for pushes: " + pushwoosh.getPushToken() + " ";
+				textField.appendText("\n Registered for pushes: " + pushwoosh.getPushToken() + " ");
 			
-			tt.text += "\n Pushwoosh HWID: " + pushwoosh.getPushwooshHWID() + " ";
-			
-			pushwoosh.scheduleLocalNotification(30, "{\"alertBody\": \"Time to collect coins!\", \"alertAction\":\"Collect!\", \"soundName\":\"sound.caf\", \"badge\": 5, \"custom\": {\"a\":\"json\"}}");
+			textField.appendText("\n Pushwoosh HWID: " + pushwoosh.getPushwooshHWID() + " ");
+
+			PushwooshGeozones.getInstance().startLocationTracking();
 			
 			this.stage.addEventListener(Event.ACTIVATE,activateHandler);
 		}
@@ -72,15 +73,15 @@ package
 		}
 		
 		public function onToken(e:PushNotificationEvent):void{
-			tt.text += "\n TOKEN received: " + e.token + " ";
+			textField.appendText("\n TOKEN received: " + e.token + " ");
 		}
 
 		public function onError(e:PushNotificationEvent):void{
-			tt.text += "\n TOKEN error: " + e.errorMessage+ " ";
+			textField.appendText("\n TOKEN error: " + e.errorMessage+ " ");
 		}
 
 		public function onPushReceived(e:PushNotificationEvent):void{
-			tt.text += "\n Push Received: " + JSON.stringify(e.parameters) + " ";
+			textField.appendText("\n Push Received: " + JSON.stringify(e.parameters) + " ");
 		}
 	}
 }
