@@ -7,7 +7,7 @@ Pushwoosh Adobe Air Native Extensions
 
 ### Guide
 
-http://docs.pushwoosh.com/docs/adobe-air  
+https://www.pushwoosh.com/platform-docs/pushwoosh-sdk/cross-platform-frameworks/adobe-air
 
 ### Documentation
 
