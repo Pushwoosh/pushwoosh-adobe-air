@@ -1,5 +1,5 @@
 var indexSectionsWithContent = {
-   "Files": {
+   "Functions": {
       "Symbols": false,
       "Numbers": false,
       "A": false,
@@ -8,7 +8,7 @@ var indexSectionsWithContent = {
       "D": false,
       "E": false,
       "F": false,
-      "G": false,
+      "G": true,
       "H": false,
       "I": false,
       "J": false,
@@ -20,7 +20,7 @@ var indexSectionsWithContent = {
       "P": true,
       "Q": false,
       "R": false,
-      "S": false,
+      "S": true,
       "T": false,
       "U": false,
       "V": false,
@@ -59,7 +59,7 @@ var indexSectionsWithContent = {
       "Y": false,
       "Z": false
       },
-   "Functions": {
+   "Files": {
       "Symbols": false,
       "Numbers": false,
       "A": false,
@@ -68,7 +68,7 @@ var indexSectionsWithContent = {
       "D": false,
       "E": false,
       "F": false,
-      "G": true,
+      "G": false,
       "H": false,
       "I": false,
       "J": false,
@@ -80,7 +80,7 @@ var indexSectionsWithContent = {
       "P": true,
       "Q": false,
       "R": false,
-      "S": true,
+      "S": false,
       "T": false,
       "U": false,
       "V": false,
