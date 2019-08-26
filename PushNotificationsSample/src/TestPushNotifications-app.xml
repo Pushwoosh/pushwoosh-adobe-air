@@ -172,6 +172,13 @@
 					android:permission="android.permission.BIND_JOB_SERVICE" />
 
                 <!-- firebase-iid START -->
+				<service
+					android:name="com.google.firebase.components.ComponentDiscoveryService"
+					android:exported="false" >
+					<meta-data
+						android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+						android:value="com.google.firebase.components.ComponentRegistrar" />
+				</service>
                 <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
                 <intent-filter>
                     <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
@@ -270,5 +277,12 @@
 	<extensions>
 		<extensionID>com.pushwoosh.PushNotification</extensionID>
         <extensionID>com.pushwoosh.geozones</extensionID>
+		<extensionID>com.distriqt.androidsupport.AppCompatV7</extensionID>
+		<extensionID>com.distriqt.androidsupport.Design</extensionID>
+		<extensionID>com.distriqt.androidsupport.RecyclerViewV7</extensionID>
+		<extensionID>com.distriqt.androidsupport.V4</extensionID>
+		<extensionID>com.distriqt.playservices.Base</extensionID>
+		<extensionID>com.distriqt.playservices.Location</extensionID>
+		<extensionID>com.distriqt.Firebase</extensionID>
 	</extensions>
 </application>
