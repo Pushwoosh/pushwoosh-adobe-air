@@ -196,6 +196,12 @@
                 <!-- firebase-iid END -->
 
 				<!-- work-runtime START -->
+				<provider
+					android:name="androidx.work.impl.WorkManagerInitializer"
+					android:authorities="air.com.pushwoosh.demoapp.workmanager-init"
+					android:directBootAware="false"
+					android:exported="false"
+					android:multiprocess="true"/>
 				<service
 					android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
 					android:directBootAware="false"
