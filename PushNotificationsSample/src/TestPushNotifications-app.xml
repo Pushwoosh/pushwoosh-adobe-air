@@ -77,9 +77,6 @@
 					android:name="com.pushwoosh.inapp.view.RemoteUrlActivity"
 					android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-				<service android:name="com.pushwoosh.inapp.InAppRetrieverService"
-				         android:permission="android.permission.BIND_JOB_SERVICE" />
-
 				<receiver
 					android:name="com.pushwoosh.BootReceiver"
 					android:enabled="true"
@@ -99,7 +96,7 @@
 				</service>
 
 				<service
-					android:name="com.pushwoosh.PushFcmIntentService">
+					android:name="com.pushwoosh.firebase.PushFcmIntentService">
 					<intent-filter>
 						<action android:name="com.google.firebase.MESSAGING_EVENT" />
 					</intent-filter>
@@ -110,12 +107,6 @@
 					android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
 				<receiver android:name="com.pushwoosh.notification.LocalNotificationReceiver" />
-
-				<service
-					android:name="com.pushwoosh.internal.utils.LockScreenService"
-					android:permission="android.permission.BIND_JOB_SERVICE"
-					android:enabled="true"
-					android:exported="false" />
                 
                 <provider
                     android:name="com.pushwoosh.PushwooshInitProvider"
@@ -123,6 +114,12 @@
                     android:enabled="true"
                     android:exported="false"
                     android:initOrder="50" />
+
+				<provider
+					android:initOrder="70"
+					android:enabled="true"
+					android:authorities="air.com.pushwoosh.demoapp.firebasepushwooshinitprovider" android:exported="false"
+					android:name="com.pushwoosh.firebase.FirebaseInitProvider"/>
                     
                 <provider
                     android:name="com.pushwoosh.nativeExtensions.PushwooshFirebaseInitProvider"
@@ -138,11 +135,6 @@
                     android:exported="true"
                     android:initOrder="60"
                     />
-
-				<service
-					android:name="com.pushwoosh.PushwooshService"
-					android:exported="false"
-					android:permission="android.permission.BIND_JOB_SERVICE" />
 
 				<receiver
 					android:name="com.pushwoosh.NotificationOpenReceiver"
@@ -171,12 +163,18 @@
 					android:exported="true"
 					android:permission="android.permission.BIND_JOB_SERVICE" />
 
-                <!-- firebase-iid START -->
+                <!-- Firebase START -->
 				<service
 					android:name="com.google.firebase.components.ComponentDiscoveryService"
 					android:exported="false" >
 					<meta-data
 						android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+						android:value="com.google.firebase.components.ComponentRegistrar" />
+					<meta-data
+						android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+						android:value="com.google.firebase.components.ComponentRegistrar" />	
+					<meta-data
+						android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
 						android:value="com.google.firebase.components.ComponentRegistrar" />
 				</service>
                 <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
@@ -185,17 +183,26 @@
                         <category android:name="air.com.pushwoosh.demoapp"/>
                     </intent-filter>
                 </receiver>
-                
-                <!-- FirebaseInstanceIdService performs security checks at runtime,
-                no need for explicit permissions despite exported="true" -->
+				<service
+					android:name="com.google.firebase.messaging.FirebaseMessagingService"
+					android:exported="false" >
+					<intent-filter android:priority="-500" >
+						<action android:name="com.google.firebase.MESSAGING_EVENT" />
+					</intent-filter>
+				</service>			
                 <service android:name="com.google.firebase.iid.FirebaseInstanceIdService" android:exported="true">
                     <intent-filter android:priority="-500">
                         <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
                     </intent-filter>
                 </service>
-                <!-- firebase-iid END -->
+				<provider
+					android:name="com.google.firebase.provider.FirebaseInitProvider"
+					android:authorities="air.com.pushwoosh.demoapp.firebaseinitprovider"
+					android:exported="false"
+					android:initOrder="100" />
+                <!-- Firebase END -->
 
-				<!-- work-runtime START -->
+				<!-- Work-runtime START -->
 				<provider
 					android:name="androidx.work.impl.WorkManagerInitializer"
 					android:authorities="air.com.pushwoosh.demoapp.workmanager-init"
@@ -278,7 +285,7 @@
 						<action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
 					</intent-filter>
 				</receiver>
-				<!-- work-runtimme END -->
+				<!-- Work-runtimme END -->
 
 				<!--
 				LOCATION
@@ -296,6 +303,10 @@
             
         		<activity
             		android:name="com.pushwoosh.nativeExtensions.AirInboxActivity" />
+
+				<activity
+					android:name="com.pushwoosh.inbox.ui.presentation.view.activity.AttachmentActivity"
+					android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 			</application>
 
             <!-- Keeps the processor from sleeping when a message is received. -->
@@ -311,7 +322,6 @@
 
             <!-- Vibration in push notification -->
             <uses-permission android:name="android.permission.VIBRATE" />
-            
             <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
             <!--BADGES-->
@@ -353,6 +363,8 @@
             <!-- location -->
             <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
             <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+			<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+			<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 		</manifest>
 
 	]]></manifestAdditions>
@@ -362,12 +374,13 @@
 	<extensions>
 		<extensionID>com.pushwoosh.PushNotification</extensionID>
         <extensionID>com.pushwoosh.geozones</extensionID>
-		<extensionID>com.distriqt.androidsupport.AppCompatV7</extensionID>
-		<extensionID>com.distriqt.androidsupport.Design</extensionID>
-		<extensionID>com.distriqt.androidsupport.RecyclerViewV7</extensionID>
-		<extensionID>com.distriqt.androidsupport.V4</extensionID>
+		<extensionID>androidx.appcompat</extensionID>
+		<extensionID>com.google.android.material</extensionID>
+		<extensionID>androidx.recyclerview</extensionID>
+		<extensionID>androidx.core</extensionID>
 		<extensionID>com.distriqt.playservices.Base</extensionID>
 		<extensionID>com.distriqt.playservices.Location</extensionID>
-		<extensionID>com.distriqt.Firebase</extensionID>
+		<extensionID>com.google.firebase.core</extensionID>
+		<extensionID>com.distriqt.Core</extensionID>
 	</extensions>
 </application>
