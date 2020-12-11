@@ -11,6 +11,9 @@
 		<td><a href="#1acf6aead53df76a08e46340a2cf015868">function PushNotification()</a></td>
 	</tr>
 	<tr>
+		<td><a href="#1afc190f31e7ab0c8714d9106e00b610d3">function scheduleLocalNotification(seconds:int, alertJson:String):int</a></td>
+	</tr>
+	<tr>
 		<td><a href="#1a6c22bdd020ab6220d117bc4dc96db50d">function clearLocalNotifications():void</a></td>
 	</tr>
 	<tr>
@@ -56,7 +59,7 @@
 		<td><a href="#1a969501243b35e996d46b618483941e81">function setIntTag(name:String, value:int):void</a></td>
 	</tr>
 	<tr>
-		<td><a href="#1afc190f31e7ab0c8714d9106e00b610d3">function scheduleLocalNotification(seconds:int, alertJson:String):int</a></td>
+		<td><a href="#1a055967d6c58109f67912cb391c2ad85d">function setStringTag(name:String, value:String):void</a></td>
 	</tr>
 	<tr>
 		<td><a href="#1a9ea4b8333d600d0b318a7f80abd83b66">function getTags(success:Function, error:Function):void</a></td>
@@ -94,9 +97,6 @@
 	<tr>
 		<td><a href="#1a15b1e6b4adc601b9875452b6ad50e2f5">function isAvailableGDPR():Boolean</a></td>
 	</tr>
-	<tr>
-		<td><a href="#1a055967d6c58109f67912cb391c2ad85d">function setStringTag(name:String, value:String):void</a></td>
-	</tr>
 </table>
 
 
@@ -113,6 +113,29 @@
 Constructor. Do not call directly. Use <a href="PushNotification.md#1a2cb12a606924276880f131cc71abbabf">getInstance()</a> method. 
 ```ActionScript
 var pushwoosh:PushNotification = PushNotification.getInstance();
+```
+
+
+----------  
+  
+
+#### <a name="1afc190f31e7ab0c8714d9106e00b610d3"></a>function scheduleLocalNotification(seconds:int, alertJson:String):int  
+Schedules local notification<br/><br/><br/><strong>Parameters</strong><br/>
+<table>
+	<tr>
+		<td><strong>seconds</strong></td>
+		<td>delay for the local notification in seconds </td>
+	</tr>
+	<tr>
+		<td><strong>alertJson</strong></td>
+		<td>JSON with the local notification</td>
+	</tr>
+</table>
+
+Example: 
+```ActionScript
+pushwoosh.scheduleLocalNotification(30, "{\"alertBody\": \"Time to collect coins!\",
+        \"alertAction\":\"Collect!\", \"soundName\":\"sound.caf\", \"badge\": 5, \"custom\": {\"a\":\"json\"}}");
 ```
 
 
@@ -247,24 +270,18 @@ Sets integer tag on a device<br/><br/><br/><strong>Parameters</strong><br/>
 ----------  
   
 
-#### <a name="1afc190f31e7ab0c8714d9106e00b610d3"></a>function scheduleLocalNotification(seconds:int, alertJson:String):int  
-Schedules local notification<br/><br/><br/><strong>Parameters</strong><br/>
+#### <a name="1a055967d6c58109f67912cb391c2ad85d"></a>function setStringTag(name:String, value:String):void  
+Sets string tag on a device<br/><br/><br/><strong>Parameters</strong><br/>
 <table>
 	<tr>
-		<td><strong>seconds</strong></td>
-		<td>delay for the local notification in seconds </td>
+		<td><strong>name</strong></td>
+		<td>is the name of the tag </td>
 	</tr>
 	<tr>
-		<td><strong>alertJson</strong></td>
-		<td>JSON with the local notification</td>
+		<td><strong>value</strong></td>
+		<td>is the value of the tag </td>
 	</tr>
 </table>
-
-Example: 
-```ActionScript
-pushwoosh.scheduleLocalNotification(30, "{\"alertBody\": \"Time to collect coins!\",
-        \"alertAction\":\"Collect!\", \"soundName\":\"sound.caf\", \"badge\": 5, \"custom\": {\"a\":\"json\"}}");
-```
 
 
 ----------  
@@ -379,19 +396,3 @@ Return flag is enable communication with server
 
 #### <a name="1a15b1e6b4adc601b9875452b6ad50e2f5"></a>function isAvailableGDPR():Boolean  
 Return flag is enabled GDPR on server 
-
-----------  
-  
-
-#### <a name="1a055967d6c58109f67912cb391c2ad85d"></a>function setStringTag(name:String, value:String):void  
-Sets string tag on a device<br/><br/><br/><strong>Parameters</strong><br/>
-<table>
-	<tr>
-		<td><strong>name</strong></td>
-		<td>is the name of the tag </td>
-	</tr>
-	<tr>
-		<td><strong>value</strong></td>
-		<td>is the value of the tag </td>
-	</tr>
-</table>
