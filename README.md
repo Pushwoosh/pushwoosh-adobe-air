@@ -11,8 +11,8 @@ https://www.pushwoosh.com/platform-docs/pushwoosh-sdk/cross-platform-frameworks/
 
 ### Documentation
 
-https://github.com/Pushwoosh/pushwoosh-adobe-air/blob/master/Documentation/Core/files/PushNotification-as.html  
-https://github.com/Pushwoosh/pushwoosh-adobe-air/blob/master/Documentation/Geozones/files/PushwooshGeozones-as.html  
+https://github.com/Pushwoosh/pushwoosh-adobe-air/blob/master/Documentation/PushNotification.md  
+https://github.com/Pushwoosh/pushwoosh-adobe-air/blob/master/Documentation/PushwooshGeozones.md  
 
 
 ### Sample
