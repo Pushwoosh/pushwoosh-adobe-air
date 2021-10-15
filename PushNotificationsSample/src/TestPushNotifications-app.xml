@@ -80,6 +80,7 @@
 				<receiver
 					android:name="com.pushwoosh.BootReceiver"
 					android:enabled="true"
+					android:exported="true"
 					android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
 					<intent-filter>
 						<action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -136,10 +137,17 @@
                     android:initOrder="60"
                     />
 
-				<receiver
-					android:name="com.pushwoosh.NotificationOpenReceiver"
+				<activity
+					android:name="com.pushwoosh.notification.NotificationOpenActivity"
+					android:noHistory="true"
+					android:theme="@android:style/Theme.Translucent.NoTitleBar"
 					android:enabled="true"
 					android:exported="false" />
+                    
+                <receiver
+                    android:name="com.pushwoosh.NotificationUpdateReceiver"
+                    android:enabled="true"
+                    android:exported="false" />
 
 				<meta-data
 					android:name="com.pushwoosh.plugin.badge"
@@ -378,6 +386,7 @@
 		<extensionID>com.google.android.material</extensionID>
 		<extensionID>androidx.recyclerview</extensionID>
 		<extensionID>androidx.core</extensionID>
+        <extensionID>com.distriqt.playservices.CloudMessaging</extensionID>
 		<extensionID>com.distriqt.playservices.Base</extensionID>
 		<extensionID>com.distriqt.playservices.Location</extensionID>
 		<extensionID>com.google.firebase.core</extensionID>
