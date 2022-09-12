@@ -64,7 +64,7 @@ package
 			
 			textField.appendText("\n Pushwoosh HWID: " + pushwoosh.getPushwooshHWID() + " ");
 
-			PushwooshGeozones.getInstance().startLocationTracking();
+			//PushwooshGeozones.getInstance().startLocationTracking();
 			
 			this.stage.addEventListener(Event.ACTIVATE,activateHandler);
 		}

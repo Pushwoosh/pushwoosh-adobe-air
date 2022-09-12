@@ -213,21 +213,24 @@
                 <!-- Firebase END -->
 
 				<!-- Work-runtime START -->
+
 				<provider
-					android:name="androidx.work.impl.WorkManagerInitializer"
-					android:authorities="air.com.pushwoosh.demoapp.workmanager-init"
-					android:directBootAware="false"
-					android:exported="false"
-					android:multiprocess="true"/>
+				    android:name="androidx.startup.InitializationProvider"
+				    android:authorities="$air.com.pushwoosh.demoapp.androidx-startup"
+				    android:exported="false">
+				    <!-- This entry makes WorkManagerInitializer discoverable. -->
+				    <meta-data  android:name="androidx.work.WorkManagerInitializer"
+				          android:value="androidx.startup" />
+				</provider>
 				<service
 					android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
 					android:directBootAware="false"
-					android:enabled="@bool/enable_system_alarm_service_default"
+					android:enabled="true"
 					android:exported="false" />
 				<service
 					android:name="androidx.work.impl.background.systemjob.SystemJobService"
 					android:directBootAware="false"
-					android:enabled="@bool/enable_system_job_service_default"
+					android:enabled="true"
 					android:exported="true"
 					android:permission="android.permission.BIND_JOB_SERVICE" />
 
@@ -289,7 +292,7 @@
 				<receiver
 					android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
 					android:directBootAware="false"
-					android:enabled="@bool/enable_system_alarm_service_default"
+					android:enabled="true"
 					android:exported="false" >
 					<intent-filter>
 						<action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
@@ -387,6 +390,7 @@
 		<extensionID>androidx.appcompat</extensionID>
 		<extensionID>com.google.android.material</extensionID>
 		<extensionID>androidx.recyclerview</extensionID>
+        <extensionID>androidx.constraintlayout</extensionID>
 		<extensionID>androidx.core</extensionID>
         <extensionID>com.distriqt.playservices.CloudMessaging</extensionID>
 		<extensionID>com.distriqt.playservices.Base</extensionID>
