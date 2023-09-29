@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="project" default="default">
+	<!-- Config -->
+	<property environment="env" />
+
+	<property file="build.config"/>
+	<property name="flex.sdk" value="${env.PW_AIR_SAMPLE_FLEX_SDK}" />
+	<property name="android.sdk" value="${env.PW_AIR_ANDROID_PLATFORM}" />
+	<property name="ios.sdkversion" value="${env.PW_AIR_IOS_SDK_VERSION}" />
+	<property name="ios.platformsdk" value="${env.PW_AIR_IOS_PLATFORM_SDK}" />
+	<property name="ios.simulator.platformsdk" value="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk" />
+	<property name="FLEX_HOME" value="${env.PW_AIR_SAMPLE_FLEX_SDK}" />
+	
+
+	<target name="default">
+			<taskdef resource="flexTasks.tasks" classpath="lib/flexTasks.jar"/>
+
+		<mxmlc file="${basedir}/src/TestPushNotifications.as"
+			 output="${basedir}/TestPushNotifications.swf">
+			 <load-config filename="config-opts.txt" />
+		</mxmlc>
+
+		<exec executable="${flex.sdk}/bin/adt${bin.ext}" failonerror="true" dir=".">
+			<arg value="-package"/>	
+			<arg value="-target"/>	
+			<arg value="ipa-debug-interpreter-simulator"/>
+			<arg line="-storetype pkcs12 -keystore Certificates.p12 -storepass password"/>
+			<arg value="TestPushNotifications.ipa"/>
+			<arg value="src/TestPushNotifications-app.xml"/>	
+			<arg value="TestPushNotifications.swf"/>
+			<arg value="-platformsdk"/>
+			<arg value="${ios.simulator.platformsdk}"/>
+			<arg value="-extdir"/>
+			<arg value="../ANE-Pushwoosh"/>
+			<arg value="-extdir"/>
+			<arg value="../ANE-Distriqt"/>
+			<arg line="assets/icon_48.png assets/icon_57.png assets/icon_72.png assets/icon_114.png assets/icon_144.png" />
+		</exec>
+
+
+		<exec executable="${flex.sdk}/bin/adt${bin.ext}" failonerror="true" dir=".">
+			<arg value="-installApp"/>	
+			<arg value="-platform"/>	
+			<arg value="ios"/>
+			<arg value="-platformsdk"/>
+			<arg value="${ios.simulator.platformsdk}"/>
+			<arg value="-device"/>	
+			<arg value="ios-simulator"/>
+			<arg value="-package"/>
+			<arg value="TestPushNotifications.ipa"/>
+			
+		</exec>
+	</target>
+
+</project>
