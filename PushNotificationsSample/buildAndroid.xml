@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="project" default="default">
+	<!-- Config -->
+	<property environment="env" />
+
+	<property file="build.config"/>
+	<property name="flex.sdk" value="${env.PW_AIR_SAMPLE_FLEX_SDK}" />
+	<property name="android.sdk" value="${env.PW_AIR_ANDROID_PLATFORM}" />
+	<property name="ios.sdkversion" value="${env.PW_AIR_IOS_SDK_VERSION}" />
+	<property name="FLEX_HOME" value="${env.PW_AIR_SAMPLE_FLEX_SDK}" />
+
+	<target name="default">
+			<taskdef resource="flexTasks.tasks" classpath="lib/flexTasks.jar"/>
+
+			<mxmlc file="${basedir}/src/TestPushNotifications.as"
+				   output="${basedir}/TestPushNotifications.swf">
+				   <load-config filename="config-opts.txt" />
+			</mxmlc>
+
+	<exec executable="${flex.sdk}/bin/adt${bin.ext}" failonerror="true" dir=".">
+		<arg value="-package"/>
+		<arg value="-target"/>
+		<arg value="apk-debug"/>
+		<arg line="-arch x64"/>
+		<arg line="-storetype JKS -keystore ../../build/certs/pushwoosh_keystore.keystore -storepass 123qwe -alias pushwoosh -keypass 123qwe"/>
+		<arg value="${name}.apk"/>
+		<arg line="src/TestPushNotifications-app.xml TestPushNotifications.swf  assets/icon_48.png assets/icon_72.png assets/icon_144.png google-services.json -extdir ../ANE-Pushwoosh -extdir ../ANE-Distriqt" />
+	</exec>
+
+	</target>
+</project>
